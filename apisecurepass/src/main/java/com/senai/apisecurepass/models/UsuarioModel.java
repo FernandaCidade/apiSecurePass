@@ -1,4 +1,4 @@
-package com.senai.apivsconnect.models;
+package com.senai.apisecurepass.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario implements Serializable {
+public class UsuarioModel implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -25,15 +25,20 @@ public class Usuario implements Serializable {
     private String nome;
     private String area;
     private String email;
-    private DateTime dataNasc;
+    private String dataNasc;
     private String funcao;
     private String sessao;
     private String face;
 
    //Referenciar sempre as tabelas do banco como  @ManytoONe
-    @ManyToOne
-    @JoinCollumn(name="id_TipoUsuario", referencedCollumnName = "id");
-    private UsuarioModel cliente;
+    @OneToOne
+    @JoinColumn(name="id_TipoUsuario", referencedColumnName = "id")
+    private TipoUsuarioModel usuario;
+
+
+    @OneToOne
+    @JoinColumn(name="id_TipoUsuario", referencedColumnName = "id")
+    private TipoUsuarioModel adm;
 
 
 }
